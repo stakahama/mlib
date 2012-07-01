@@ -5,4 +5,4 @@
 ## Verbose
 ############
 
-ln -svf lib ~/lib/matlab
+ln -svf $PWD/lib $HOME/lib/matlab
