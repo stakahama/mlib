@@ -1,11 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%
-% Code for processing STXM data from beamline 5.3.2.
-% ~read_table.m~
-% $Rev: 17 $
-% Sept. 2009
-% Satoshi Takahama (stakahama@ucsd.edu)
-%%%%%%%%%%%%%%%%%%%%
-
 function s = read_table(fid,sep,header,skip,nrow)
 % arguments: fid, sep, header, skip, nrow
 % fid can be provided as file name of value of fopen
@@ -132,7 +124,8 @@ try
     hdrnms = regexprep(hdrnms,'\W+',''); % removes whitespace
     s = cell2struct(listStruct,hdrnms,2);
 catch
-    hdrnms = strcat(repmat('V',max(fds),1),strjust(num2str([1:max(fds)]'),'left'));    
+    %hdrnms = strcat(repmat('V',max(fds),1),strjust(num2str([1:max(fds)]'),'left'));    
+    hdrnms = cellfun(@(x) sprintf('V%d',x),num2cell(1:max(fds)),'UniformOutput',0);
     s = cell2struct(listStruct,hdrnms,2);
 end
 
